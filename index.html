@@ -19,7 +19,14 @@
 
     <div id="chat-box">
       <div class="message bot">
-        嗨！這是我們組一起做的 Chatbot 🎉
+        👋 哈囉！歡迎來到我們組的 Chatbot！<br>
+        我是你的智慧小幫手 🤖，很高興認識你～<br><br>
+        💡 你可以試著問我：<br>
+        &nbsp;&nbsp;• 「你好」/ 「hello」— 打招呼<br>
+        &nbsp;&nbsp;• 「幫助」/ 「help」— 查看功能<br>
+        &nbsp;&nbsp;• 「組員」— 認識我們的團隊<br>
+        &nbsp;&nbsp;• 「天氣」— 天氣小提醒<br>
+        &nbsp;&nbsp;• 「笑話」— 聽個笑話放鬆一下 😄
       </div>
     </div>
 
@@ -49,8 +56,35 @@
 
       const botDiv = document.createElement('div');
       botDiv.className = 'message bot';
-      // 組員 A 任務：修改這裡的回覆邏輯
-      botDiv.textContent = `你說了「${text}」！`;
+
+      // 關鍵字回覆邏輯
+      const lower = text.toLowerCase();
+      let reply = '';
+
+      if (/你好|哈囉|嗨|hello|hi/.test(lower)) {
+        reply = '你好呀！😊 很開心見到你，有什麼我可以幫你的嗎？';
+      } else if (/幫助|help|功能|怎麼用/.test(lower)) {
+        reply = '📋 我可以回應以下關鍵字：\n「你好」、「組員」、「天氣」、「笑話」\n有問題盡管問我！';
+      } else if (/組員|成員|團隊|who/.test(lower)) {
+        reply = '👥 我們的組員超強的！\n詳細名單請看頁面下方的組員列表 😎';
+      } else if (/天氣|weather/.test(lower)) {
+        reply = '☀️ 今天天氣如何？記得出門前查一下天氣預報，帶把傘以防萬一喔！🌂';
+      } else if (/笑話|joke|說個笑話/.test(lower)) {
+        const jokes = [
+          '為什麼程式設計師不喜歡大自然？因為那裡有太多 bugs 🐛',
+          '一個 SQL 語句走進酒吧，走向兩張桌子說：「我可以 JOIN 你們嗎？」😂',
+          '問：程式設計師最怕什麼？答：1 + 1 = 10 😱（二進位！）'
+        ];
+        reply = jokes[Math.floor(Math.random() * jokes.length)];
+      } else if (/謝謝|感謝|thank/.test(lower)) {
+        reply = '不客氣！😄 能幫到你是我的榮幸～';
+      } else if (/再見|掰掰|bye|goodbye/.test(lower)) {
+        reply = '掰掰！👋 下次再聊，祝你有個美好的一天！☀️';
+      } else {
+        reply = `你說了「${text}」！🤔 我還在學習中，試試看「幫助」看看我能做什麼吧～`;
+      }
+
+      botDiv.innerHTML = reply.replace(/\n/g, '<br>');
       chatBox.appendChild(botDiv);
 
       input.value = '';

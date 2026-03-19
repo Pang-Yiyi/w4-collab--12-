@@ -11,7 +11,7 @@
 |------|------|---------|------|------|
 | 組長 | （填名字）| `main` | 修改標題 & header 顏色 | ⬜ |
 | 組員 A | （填名字）| `feature/member-a` | 修改使用者訊息顏色 & 加計數器 | ⬜ |
-| 組員 B | （填名字）| `feature/member-b` | 修改按鈕樣式 & 加 footer 名單 | ⬜ |
+| 組員 B | （邱家悅）| `feature/member-b` | 修改按鈕樣式 & 加 footer 名單 | ⬜ |
 | 組員 C | （填名字）| `feature/member-c` | 加入歡迎訊息 & 自訂回覆邏輯 | ⬜ |
 | 組員 D | （何平）| `feature/member-d` | 加入深色模式切換按鈕 | ✅ |
 | 組員 E | （填名字）| `feature/member-e` | 加入清除對話功能 | ⬜ |
@@ -35,10 +35,10 @@
 - [ ] 開 PR，請組長 review
 
 ### 組員 B（`feature/member-b` branch）
-- [ ] 修改 `.input-area button` 的顏色和 `border-radius`
-- [ ] 在 `index.html` 的 `<footer>` 加入組員名單
-- [ ] 在 `style.css` 加上 footer 的樣式
-- [ ] 開 PR，請組長 review
+- [🔀] 修改 `.input-area button` 的顏色和 `border-radius`
+- [🔀] 在 `index.html` 的 `<footer>` 加入組員名單
+- [🔀] 在 `style.css` 加上 footer 的樣式
+- [🔀] 開 PR，請組長 review
 
 ### 組員 C（`feature/member-c` branch）
 - [ ] 在 `#chat-box` 加一則更個性化的歡迎訊息

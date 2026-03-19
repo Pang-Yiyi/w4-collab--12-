@@ -16,7 +16,7 @@
     </header>
 
     <!-- 組員 A 任務：在這裡加上訊息計數顯示 -->
-    <!-- <p id="counter">訊息數：0</p> -->
+    <p id="counter">訊息數：0</p>
 
     <div id="chat-box">
       <div class="message bot">
@@ -113,6 +113,11 @@
 
       input.value = '';
       chatBox.scrollTop = chatBox.scrollHeight;
+
+      // 組員 A 任務：更新訊息計數
+      const counter = document.getElementById('counter');
+      const current = parseInt(counter.textContent.replace('訊息數：', '')) || 0;
+      counter.textContent = `訊息數：${current + 1}`;
     }
 
     function clearChat() {

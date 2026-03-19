@@ -12,6 +12,7 @@
       <!-- 組長任務：把這裡改成你們組的名稱 -->
       <h1>🤖 第 X 組的 Chatbot</h1>
       <p class="subtitle">W4 多人協作練習</p>
+      <button id="theme-toggle" onclick="toggleTheme()">🌙 切換模式</button>
     </header>
 
     <!-- 組員 A 任務：在這裡加上訊息計數顯示 -->
@@ -36,6 +37,28 @@
   </div>
 
   <script>
+    // 檢查並載入偏好的主題
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+      document.getElementById('theme-toggle').textContent = '☀️ 切換模式';
+    }
+
+    function toggleTheme() {
+      const body = document.body;
+      const themeBtn = document.getElementById('theme-toggle');
+      body.classList.toggle('dark-mode');
+      
+      let theme = 'light';
+      if (body.classList.contains('dark-mode')) {
+        theme = 'dark';
+        themeBtn.textContent = '☀️ 切換模式';
+      } else {
+        themeBtn.textContent = '🌙 切換模式';
+      }
+      localStorage.setItem('theme', theme);
+    }
+
     function sendMessage() {
       const input = document.getElementById('user-input');
       const chatBox = document.getElementById('chat-box');

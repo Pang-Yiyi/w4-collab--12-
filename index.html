@@ -1,137 +1,138 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <title>我們組的 Chatbot</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>我們組的 Chatbot</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- 組長任務：把這裡改成你們組的名稱 -->
+        <h1>🤖 第 X 組的 Chatbot</h1>
+        <p class="subtitle">W4 多人協作練習</p>
+        <button id="theme-toggle" onclick="toggleTheme()">🌙 切換模式</button>
+      </header>
 
-<body>
+      <!-- 組員 A 任務：在這裡加上訊息計數顯示 -->
+      <p id="counter">訊息數：0</p>
 
-  <div class="container">
-    <header>
-      <!-- 組長任務：把這裡改成你們組的名稱 -->
-      <h1>🤖 第 X 組的 Chatbot</h1>
-      <p class="subtitle">W4 多人協作練習</p>
-      <button id="theme-toggle" onclick="toggleTheme()">🌙 切換模式</button>
-    </header>
-
-    <!-- 組員 A 任務：在這裡加上訊息計數顯示 -->
-    <p id="counter">訊息數：0</p>
-
-    <div id="chat-box">
-      <div class="message bot">
-        👋 哈囉！歡迎來到我們組的 Chatbot！<br>
-        我是你的智慧小幫手 🤖，很高興認識你～<br><br>
-        💡 你可以試著問我：<br>
-        &nbsp;&nbsp;• 「你好」/ 「hello」— 打招呼<br>
-        &nbsp;&nbsp;• 「幫助」/ 「help」— 查看功能<br>
-        &nbsp;&nbsp;• 「組員」— 認識我們的團隊<br>
-        &nbsp;&nbsp;• 「天氣」— 天氣小提醒<br>
-        &nbsp;&nbsp;• 「笑話」— 聽個笑話放鬆一下 😄
+      <div id="chat-box">
+        <div class="message bot">
+          👋 哈囉！歡迎來到我們組的 Chatbot！<br />
+          我是你的智慧小幫手 🤖，很高興認識你～<br /><br />
+          💡 你可以試著問我：<br />
+          &nbsp;&nbsp;• 「你好」/ 「hello」— 打招呼<br />
+          &nbsp;&nbsp;• 「幫助」/ 「help」— 查看功能<br />
+          &nbsp;&nbsp;• 「組員」— 認識我們的團隊<br />
+          &nbsp;&nbsp;• 「天氣」— 天氣小提醒<br />
+          &nbsp;&nbsp;• 「笑話」— 聽個笑話放鬆一下 😄
+        </div>
       </div>
+
+      <div class="input-area">
+        <input id="user-input" type="text" placeholder="輸入訊息..." />
+        <button onclick="sendMessage()">送出</button>
+        <button class="clear-btn" onclick="clearChat()">清除對話</button>
+      </div>
+
+      <!-- 組員 B 任務：在這裡加上組員名單 -->
+      <footer>
+        <p>組員：邱家悅、劉嘉鎔、龎靚伊、張紹謙、何平</p>
+      </footer>
     </div>
 
-    <div class="input-area">
-      <input id="user-input" type="text" placeholder="輸入訊息...">
-      <button onclick="sendMessage()">送出</button>
-      <button class="clear-btn" onclick="clearChat()">清除對話</button>
-    </div>
-
-    <!-- 組員 B 任務：在這裡加上組員名單 -->
-    <footer>
-      <p>組員：邱家悅、劉嘉鎔、龎靚伊、張紹謙、何平</p>
-    </footer>
-  </div>
-
-  <script>
-    // 檢查並載入偏好的主題
-    const currentTheme = localStorage.getItem('theme');
-    if (currentTheme === 'dark') {
-      document.body.classList.add('dark-mode');
-      document.getElementById('theme-toggle').textContent = '☀️ 切換模式';
-    }
-
-    function toggleTheme() {
-      const body = document.body;
-      const themeBtn = document.getElementById('theme-toggle');
-      body.classList.toggle('dark-mode');
-      
-      let theme = 'light';
-      if (body.classList.contains('dark-mode')) {
-        theme = 'dark';
-        themeBtn.textContent = '☀️ 切換模式';
-      } else {
-        themeBtn.textContent = '🌙 切換模式';
-      }
-      localStorage.setItem('theme', theme);
-    }
-
-    function sendMessage() {
-      const input = document.getElementById('user-input');
-      const chatBox = document.getElementById('chat-box');
-      const text = input.value.trim();
-
-      if (!text) return;
-
-      const userDiv = document.createElement('div');
-      userDiv.className = 'message user';
-      userDiv.textContent = text;
-      chatBox.appendChild(userDiv);
-
-      const botDiv = document.createElement('div');
-      botDiv.className = 'message bot';
-
-      // 關鍵字回覆邏輯
-      const lower = text.toLowerCase();
-      let reply = '';
-
-      if (/你好|哈囉|嗨|hello|hi/.test(lower)) {
-        reply = '你好呀！😊 很開心見到你，有什麼我可以幫你的嗎？';
-      } else if (/幫助|help|功能|怎麼用/.test(lower)) {
-        reply = '📋 我可以回應以下關鍵字：\n「你好」、「組員」、「天氣」、「笑話」\n有問題盡管問我！';
-      } else if (/組員|成員|團隊|who/.test(lower)) {
-        reply = '👥 我們的組員超強的！\n詳細名單請看頁面下方的組員列表 😎';
-      } else if (/天氣|weather/.test(lower)) {
-        reply = '☀️ 今天天氣如何？記得出門前查一下天氣預報，帶把傘以防萬一喔！🌂';
-      } else if (/笑話|joke|說個笑話/.test(lower)) {
-        const jokes = [
-          '為什麼程式設計師不喜歡大自然？因為那裡有太多 bugs 🐛',
-          '一個 SQL 語句走進酒吧，走向兩張桌子說：「我可以 JOIN 你們嗎？」😂',
-          '問：程式設計師最怕什麼？答：1 + 1 = 10 😱（二進位！）'
-        ];
-        reply = jokes[Math.floor(Math.random() * jokes.length)];
-      } else if (/謝謝|感謝|thank/.test(lower)) {
-        reply = '不客氣！😄 能幫到你是我的榮幸～';
-      } else if (/再見|掰掰|bye|goodbye/.test(lower)) {
-        reply = '掰掰！👋 下次再聊，祝你有個美好的一天！☀️';
-      } else {
-        reply = `你說了「${text}」！🤔 我還在學習中，試試看「幫助」看看我能做什麼吧～`;
+    <script>
+      // 檢查並載入偏好的主題
+      const currentTheme = localStorage.getItem("theme");
+      if (currentTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        document.getElementById("theme-toggle").textContent = "☀️ 切換模式";
       }
 
-      botDiv.innerHTML = reply.replace(/\n/g, '<br>');
-      chatBox.appendChild(botDiv);
+      function toggleTheme() {
+        const body = document.body;
+        const themeBtn = document.getElementById("theme-toggle");
+        body.classList.toggle("dark-mode");
 
-      input.value = '';
-      chatBox.scrollTop = chatBox.scrollHeight;
+        let theme = "light";
+        if (body.classList.contains("dark-mode")) {
+          theme = "dark";
+          themeBtn.textContent = "☀️ 切換模式";
+        } else {
+          themeBtn.textContent = "🌙 切換模式";
+        }
+        localStorage.setItem("theme", theme);
+      }
 
-      // 組員 A 任務：更新訊息計數
-      const counter = document.getElementById('counter');
-      const current = parseInt(counter.textContent.replace('訊息數：', '')) || 0;
-      counter.textContent = `訊息數：${current + 1}`;
-    }
+      function sendMessage() {
+        const input = document.getElementById("user-input");
+        const chatBox = document.getElementById("chat-box");
+        const text = input.value.trim();
 
-    function clearChat() {
-      const chatBox = document.getElementById('chat-box');
-      chatBox.innerHTML = '';
-    }
+        if (!text) return;
 
-    document.getElementById('user-input').addEventListener('keypress', function (e) {
-      if (e.key === 'Enter') sendMessage();
-    });
-  </script>
+        const userDiv = document.createElement("div");
+        userDiv.className = "message user";
+        userDiv.textContent = text;
+        chatBox.appendChild(userDiv);
 
-</body>
+        const botDiv = document.createElement("div");
+        botDiv.className = "message bot";
 
+        // 關鍵字回覆邏輯
+        const lower = text.toLowerCase();
+        let reply = "";
+
+        if (/你好|哈囉|嗨|hello|hi/.test(lower)) {
+          reply = "你好呀！😊 很開心見到你，有什麼我可以幫你的嗎？";
+        } else if (/幫助|help|功能|怎麼用/.test(lower)) {
+          reply =
+            "📋 我可以回應以下關鍵字：\n「你好」、「組員」、「天氣」、「笑話」\n有問題盡管問我！";
+        } else if (/組員|成員|團隊|who/.test(lower)) {
+          reply = "👥 我們的組員超強的！\n詳細名單請看頁面下方的組員列表 😎";
+        } else if (/天氣|weather/.test(lower)) {
+          reply =
+            "☀️ 今天天氣如何？記得出門前查一下天氣預報，帶把傘以防萬一喔！🌂";
+        } else if (/笑話|joke|說個笑話/.test(lower)) {
+          const jokes = [
+            "為什麼程式設計師不喜歡大自然？因為那裡有太多 bugs 🐛",
+            "一個 SQL 語句走進酒吧，走向兩張桌子說：「我可以 JOIN 你們嗎？」😂",
+            "問：程式設計師最怕什麼？答：1 + 1 = 10 😱（二進位！）",
+          ];
+          reply = jokes[Math.floor(Math.random() * jokes.length)];
+        } else if (/謝謝|感謝|thank/.test(lower)) {
+          reply = "不客氣！😄 能幫到你是我的榮幸～";
+        } else if (/再見|掰掰|bye|goodbye/.test(lower)) {
+          reply = "掰掰！👋 下次再聊，祝你有個美好的一天！☀️";
+        } else {
+          reply = `你說了「${text}」！🤔 我還在學習中，試試看「幫助」看看我能做什麼吧～`;
+        }
+
+        botDiv.innerHTML = reply.replace(/\n/g, "<br>");
+        chatBox.appendChild(botDiv);
+
+        input.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // 組員 A 任務：更新訊息計數
+        const counter = document.getElementById("counter");
+        const current =
+          parseInt(counter.textContent.replace("訊息數：", "")) || 0;
+        counter.textContent = `訊息數：${current + 1}`;
+      }
+
+      function clearChat() {
+        const chatBox = document.getElementById("chat-box");
+        chatBox.innerHTML = "";
+      }
+
+      document
+        .getElementById("user-input")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") sendMessage();
+        });
+    </script>
+  </body>
 </html>

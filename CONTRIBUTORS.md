@@ -51,10 +51,10 @@
 - [ ] 開 PR，請組長 review
 
 ### 組員 E（`feature/member-e` branch）
-- [ ] 在 `index.html` 的 input-area 加入「清除對話」按鈕
-- [ ] 在 `<script>` 中加入 `clearChat()` 函數，清空 `#chat-box` 的內容
-- [ ] 在 `style.css` 為清除按鈕加上樣式（建議用不同顏色與 main 按鈕區分）
-- [ ] 開 PR，請組長 review
+- [x] 在 `index.html` 的 input-area 加入「清除對話」按鈕
+- [x] 在 `<script>` 中加入 `clearChat()` 函數，清空 `#chat-box` 的內容
+- [x] 在 `style.css` 為清除按鈕加上樣式（建議用不同顏色與 main 按鈕區分）
+- [x] 開 PR，請組長 review
 
 ---
 
